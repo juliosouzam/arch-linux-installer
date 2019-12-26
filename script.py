@@ -38,7 +38,7 @@ try:
     run(['mkfs.ext2', '-L', 'BOOT', PART_BOOT], check=True)
     run(['sleep', '2'])
     print('######### FORMATANDO BOOT EFI #########')
-    run(['mkfs.fat', '-F32', '-L', 'BOOT_EFI', PART_BOOT_EFI], check=True)
+    run(['mkfs.fat', '-F32', PART_BOOT_EFI], check=True)
     run(['sleep', '2'])
     print('######### FORMATANDO TMP #########')
     run(['mkfs.btrfs', '-L', 'TMP', PART_TMP], check=True)
