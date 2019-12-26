@@ -13,15 +13,15 @@ PART_HOME = '/dev/sda5'
 
 try:
     print('######### CONFIGURANDO TECLADO #########')
-    # run(['loadkeys', 'br-abnt2'], check=True)
+    run(['loadkeys', 'br-abnt2'], check=True)
     print('######### TECLADO Ok #########')
 
     print('######### VERIFICANDO INTERNET #########')
-    # run(['ping', '-c', '3', 'archlinux.org'], check=True)
+    run(['ping', '-c', '3', 'archlinux.org'], check=True)
     print('######### INTERNET OK #########')
 
     print('######### CONFIGURANDO DATA #########')
-    # run(['timedatectl', 'set-ntp', 'true'], check=True)
+    run(['timedatectl', 'set-ntp', 'true'], check=True)
     print('######### DATA OK #########')
 
     print('As partições deveram ser /dev/sda1 = BOOT, /dev/sda2 = BOOT EFI, /dev/sda3 = TMP, /dev/sda4 = ROOT, /dev/sda5 = HOME')
@@ -53,21 +53,34 @@ try:
     print('ROOT')
     run(['mount', PART_ROOT, '/mnt'], check=True)
     print('BOOT')
+    run(['mkdir', '-p', '/mnt/boot'])
     run(['mount', PART_BOOT, '/mnt/boot'], check=True)
     print('BOOT EFI')
-    run(['mkdir -p /mnt/boot/efi'], check=True)
+    run(['mkdir', '-p', '/mnt/boot/efi'], check=True)
     run(['mount', PART_BOOT_EFI, '/mnt/boot/efi'], check=True)
     print('HOME')
-    run(['mkdir -p /mnt/home'], check=True)
+    run(['mkdir', '-p', '/mnt/home'], check=True)
     run(['mount', PART_HOME, '/mnt/home'], check=True)
     print('TMP')
-    run(['mkdir -p /mnt/tmp'], check=True)
+    run(['mkdir', '-p', '/mnt/tmp'], check=True)
     run(['mount', PART_TMP, '/mnt/tmp'], check=True)
 
     run(['lsblk', '/dev/sda'], check=True)
     r = (input('Tudo certo? (y/N)') or 'n').lower()
     if r != 'y' or r == 'n':
         run(['exit 0'], check=True)
+
+    run(['pacman', '-Suuyy', '--noconfirm'])
+    run(['pacman', '-S', '--noconfirm', 'pacman-contrib'])
+
+    run(['curl', '-sSf', 'https://www.archlinux.org/mirrorlist/all/https/',
+         '-o', '/etc/pacman.d/mirrorlist.backup'])
+    run(['sed', '-i', "'s/^#Server/Server/'", '/etc/pacman.d/mirrorlist.backup'])
+    run(['rankmirrors', '-n', '6', '/etc/pacman.d/mirrorlist.backup',
+         '>', '/etc/pacman.d/mirrorlist'])
+
+    run(['pacstrap', '-i', '/mnt', 'base', 'base-devel',
+         'linux', 'linux-zen', 'linux-firmware', 'vim', 'dhcpcd', '--noconfirm'])
 
 except Exception as e:
     print(e)
