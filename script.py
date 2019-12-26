@@ -76,7 +76,7 @@ try:
     run(['curl', '-sSf', 'https://www.archlinux.org/mirrorlist/all/https/',
          '-o', '/etc/pacman.d/mirrorlist.backup'])
     run(['sed', '-i', "'s/^#Server/Server/'", '/etc/pacman.d/mirrorlist.backup'])
-    run(['rankmirrors', '-n', '6', '/etc/pacman.d/mirrorlist.backup',
+    run(['rankmirrors', '-n', '20', '/etc/pacman.d/mirrorlist.backup',
          '>', '/etc/pacman.d/mirrorlist'])
 
     run(['pacstrap', '-i', '/mnt', 'base', 'base-devel',
