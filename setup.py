@@ -26,7 +26,7 @@ try:
 
     run(['echo', '127.0.0.1\tlocalhost', '>', '/etc/hosts'], check=True)
 
-    run(['sed', '-i', 's/nameserver/#nameserver/g', '/etc/resolv.conf'], check=True)
+#     run(['sed', '-i', 's/nameserver/#nameserver/g', '/etc/resolv.conf'], check=True)
     run(['echo', 'nameserver\t8.8.8.8', '>>', '/etc/resolv.conf'], check=True)
     run(['echo', 'nameserver\t8.8.4.4', '>>', '/etc/resolv.conf'], check=True)
 
