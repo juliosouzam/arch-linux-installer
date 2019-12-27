@@ -4,11 +4,12 @@
 Boot arch linux installer with a pendriver or a cd/dvd
 
 ### Second
+Download the 2 files
 ```sh
 first download the installer file
 # curl -sSf https://raw.githubusercontent.com/juliosouzam/arch-linux-installer/master/installer.py -o installer.py
 
-seconde download the setup file
+second download the setup file
 # curl -sSf https://raw.githubusercontent.com/juliosouzam/arch-linux-installer/master/setup.py -o setup.py;
 ```
 
