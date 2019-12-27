@@ -9,7 +9,7 @@ LANG = input('Qual a lang? (default: pt_BR) ') or 'pt_BR'
 ENCODE = input('Qual o encode? (default: UTF-8)') or 'UTF-8'
 TIME_ZONE = input(
     'Qual o timezone? (default: America/Fortaleza) ') or 'America/Fortaleza'
-exit
+
 try:
     run(['sed', '-i', '/' + LANG + '/,+1 s/^#//', '/etc/locale.gen'], check=True)
     run(['locale-gen'], check=True)
