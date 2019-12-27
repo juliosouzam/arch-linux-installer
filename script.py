@@ -70,7 +70,7 @@ try:
     if r != 'y' or r == 'n':
         run(['exit 0'], check=True)
 
-    run(['pacman', '-Suuyy', '--noconfirm'], check=True)
+    # run(['pacman', '-Suuyy', '--noconfirm'], check=True)
     run(['pacman', '-S', '--noconfirm', 'pacman-contrib'], check=True)
 
     # run(['curl', '-sSf', 'https://www.archlinux.org/mirrorlist/all/https/',
