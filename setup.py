@@ -40,13 +40,12 @@ try:
     print('#### DEFINIR SENHA ROOT #####')
     run(['passwd'], check=True)
 
-    run(['pacman', '-S', 'bash-completion', '--noconfirm'], check=True)
+    run(['pacman', '-S', 'bash-completion', 'grub',
+         'efibootmgr', '--noconfirm'], check=True)
 
     run(['sed', '-i', '/%wheel ALL=(ALL) ALL/s/^#//', '/etc/sudoers'], check=True)
 
-    run(['mkinitcpio', '-P'], check=True)
-
-    run(['pacman', '-S', 'grub', 'efibootmgr', '--noconfirm'], check=True)
+    run(['mkinitcpio', '-P'])
 
     run(['grub-install', '--target=x86_64-efi', '--efi-directory=/boot/efi',
          '--bootloader-id=GRUB', '--recheck'], check=True)

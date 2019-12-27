@@ -71,9 +71,9 @@ try:
     run(['pacman', '-S', '--noconfirm', 'pacman-contrib'], check=True)
 
     run(['pacstrap', '-i', '/mnt', 'base', 'base-devel',
-         'linux-zen', 'vim', 'dhcpcd', '--noconfirm'], check=True)
+         'linux-zen', 'vim', 'dhcpcd', 'python', '--noconfirm'], check=True)
 
-    run(['genfstab', '-U', '/mnt', '>>', '/mnt/etc/fstab'], check=True)
+    run(['genfstab', '-U', '/mnt', '>', '/mnt/etc/fstab'], check=True)
 
     run(['cat', '/mnt/etc/fstab'], check=True)
 
