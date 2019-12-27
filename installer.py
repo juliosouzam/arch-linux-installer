@@ -77,6 +77,8 @@ try:
 
     run(['cat', '/mnt/etc/fstab'], check=True)
 
+    run(['cp', 'setup.py', '/mnt'], check=True)
+
     run(['arch-chroot', '/mnt'], check=True)
 
 except Exception as e:
