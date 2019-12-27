@@ -1,8 +1,5 @@
 from subprocess import run
 
-USER = input('Qual usuário? ') or 'julio'
-HOSTNAME = input('Qual o hostname? ') or 'juliocesar'
-PASSWORD = input('Qual a senha? (default: admin)') or 'admin'
 SDA = input('Qual o disco? (default: /dev/sda)') or '/dev/sda'
 
 PART_BOOT = '/dev/sda1'
@@ -65,7 +62,7 @@ try:
     run(['mkdir', '-p', '/mnt/tmp'], check=True)
     run(['mount', PART_TMP, '/mnt/tmp'], check=True)
 
-    run(['lsblk', '/dev/sda'], check=True)
+    run(['lsblk', SDA], check=True)
     r = (input('Tudo certo? (y/N)') or 'n').lower()
     if r != 'y' or r == 'n':
         run(['exit 0'], check=True)
@@ -80,7 +77,7 @@ try:
 
     run(['cat', '/mnt/etc/fstab'], check=True)
 
-    # run(['arch-chroot', '/mnt'], check=True)
+    run(['arch-chroot', '/mnt'], check=True)
 
 except Exception as e:
     print(e)
