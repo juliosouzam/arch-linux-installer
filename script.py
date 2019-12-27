@@ -70,17 +70,18 @@ try:
     if r != 'y' or r == 'n':
         run(['exit 0'], check=True)
 
-    run(['pacman', '-Suuyy', '--noconfirm'])
-    run(['pacman', '-S', '--noconfirm', 'pacman-contrib'])
+    run(['pacman', '-Suuyy', '--noconfirm'], check=True)
+    run(['pacman', '-S', '--noconfirm', 'pacman-contrib'], check=True)
 
-    run(['curl', '-sSf', 'https://www.archlinux.org/mirrorlist/all/https/',
-         '-o', '/etc/pacman.d/mirrorlist.backup'])
-    run(['sed', '-i', "'s/^#Server/Server/'", '/etc/pacman.d/mirrorlist.backup'])
-    run(['rankmirrors', '-n', '20', '/etc/pacman.d/mirrorlist.backup',
-         '>', '/etc/pacman.d/mirrorlist'])
+    # run(['curl', '-sSf', 'https://www.archlinux.org/mirrorlist/all/https/',
+    #      '-o', '/etc/pacman.d/mirrorlist.backup'], check=True)
+    # run(['sed', '-i', 's/^#Server/Server/',
+    #      '/etc/pacman.d/mirrorlist.backup'], check=True)
+    # run(['rankmirrors', '-n', '20', '/etc/pacman.d/mirrorlist.backup',
+    #      '>', '/etc/pacman.d/mirrorlist'], check=True)
 
     run(['pacstrap', '-i', '/mnt', 'base', 'base-devel',
-         'linux', 'linux-zen', 'linux-firmware', 'vim', 'dhcpcd', '--noconfirm'])
+         'linux-zen', 'vim', 'dhcpcd', '--noconfirm'], check=True)
 
 except Exception as e:
     print(e)
